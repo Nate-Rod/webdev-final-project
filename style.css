@@ -1,0 +1,10 @@
+body{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #a93f55;
+}
+
+.white{
+  color: #e9f1f7;
+}
