@@ -9,7 +9,7 @@ body{
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: #a93f55;
+  background-color: #e9f1f7;
 }
 
 #header{
@@ -33,7 +33,6 @@ div.left-col, div.right-col{
   height: 100%;
   width: 50%;
 }
-
 
 .centered-content{
   justify-content: space-around;
@@ -63,6 +62,10 @@ img.rounded-large, img.large{
 
 .blue-bg{
   background-color: #2f9fe0;
+}
+
+.purple-bg{
+  background-color: #a93f55;
 }
 
 #credits{
