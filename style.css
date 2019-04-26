@@ -27,6 +27,14 @@ body{
   width: 100%;
 }
 
+/*Basic Formatting Tools*/
+div.fullscreen{width: 100%; height: 100%;}
+div.flex-col{display: flex; flex-direction: column;}
+div.flex-row{display: flex; flex-direction: row;}
+div.flex-row-r{display: flex; flex-direction: row-reverse;}
+
+div.five-row{width: 100%; height: 20%;}
+
 div.left-col, div.right-col{
   display: inherit;
   flex-direction: column;
@@ -43,6 +51,9 @@ img{
   object-fit: scale-down;
 }
 
+img:hover{
+  cursor: pointer;
+}
 img.rounded-small, img.rounded-medium, img.rounded-large, img.rounded{
   border-radius: 50%;
 }
@@ -64,9 +75,15 @@ img.rounded-large, img.large{
   background-color: #2f9fe0;
 }
 
-.purple-bg{
-  background-color: #a93f55;
-}
+.purple-bg{background-color: #a93f55;}
+
+.rock-bg{background-color: #c6b4a7; /*#6b4423;*/}
+
+.ice-bg{background-color: #c9dae8}
+
+.fire-bg{background-color: #f9cba0}
+
+.grass-bg{background-color: #b3d59d}
 
 #credits{
   display: inherit;
@@ -77,5 +94,5 @@ img.rounded-large, img.large{
 }
 /*Debug CSS*/
 .test-box{
-  border: 1px solid #e9f1f7;
+  border: 1px solid #000000;
 }
