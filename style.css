@@ -27,6 +27,16 @@ body{
   width: 100%;
 }
 
+/*RPS Game Screen*/
+div.element-name-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  width: 33%;
+}
+
 /*Basic Formatting Tools*/
 div.fullscreen{width: 100%; height: 100%;}
 div.flex-col{display: flex; flex-direction: column;}
@@ -54,6 +64,7 @@ img{
 img:hover{
   cursor: pointer;
 }
+
 img.rounded-small, img.rounded-medium, img.rounded-large, img.rounded{
   border-radius: 50%;
 }
