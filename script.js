@@ -30,6 +30,11 @@ function loadRPSChoices(){
   var elementNames = [];
   $("body").prepend(chooseElement);
   $("#choose-element").after(fullScreenBlank);
+  q = document.createElement("h6");
+  r = document.createTextNode("Player XX, choose your element.");
+  q.className = "white";
+  q.appendChild(r);
+  document.getElementById("choose-element").appendChild(q);
   //$("body").prepend(fullScreenBlank);
   for(var i = 0; i < 5; i++){
     choiceContainers[i] = document.createElement("div");
