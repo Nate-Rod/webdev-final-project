@@ -66,7 +66,7 @@ function loadRPSChoices(){
 }
 
 function cpuPlay(){
-
+  return Math.floor(Math.random() * imgArray.length); //0 to 4
 }
 
 function randImg(){
@@ -76,7 +76,22 @@ function randImg(){
 //see https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_document_addeventlistener_param
 //for additional help w/ passing function parameters using addEventListener
 function playerPlay(option, player){
-  console.log("Player " + player + " chose option " + option + ": " + elementDesc[option]);
+  console.log("playerPlay(" + option +  " " + player + ")");
+  if(twoPlayers && playerNum == 1){
+    playerNum = 2;
+    clearScreen(); //not the most efficient but it works
+    console.log("Player " + player + " chose option " + option + ": " + elementDesc[option]);
+    //loadRPSChoices();
+  } else if (twoPlayers){
+    playerNum = 1;
+    clearScreen();
+    console.log("Player " + player + " chose option " + option + ": " + elementDesc[option]);
+    //loadRPSChoices();
+  }else{
+    console.log("Player " + player + " chose option " + option + ": " + elementDesc[option]);
+    console.log("If I wrote code for it, the CPU would play here.")
+    //cpuPlay();
+  }
 }
 
 //takes the inputs from both players and determines a winner
@@ -90,6 +105,11 @@ function compareChoices(){
 //"Play again?" at the bottom-center to start the game over again
 function loadWinScreen(winner){
 
+}
+
+function clearScreen(){
+  console.log("Document would be cleared here if I wrote any code to do so.");
+  //document.write();
 }
 
 function twoPlayerMode(){
