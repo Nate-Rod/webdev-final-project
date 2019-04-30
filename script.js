@@ -4,7 +4,7 @@ const chooseElement = "<div id='choose-element' class='black-bg centered-content
 const imgSRC = "images/rps/";
 const imgArray = [imgSRC + "rock_s.png",
                   imgSRC + "ice_s.png",
-                  imgSRC + "earth_01_s.png",
+                  imgSRC + "earth_0" + randImg() + "_s.png",
                   imgSRC + "fire_s.png",
                   imgSRC + "grass_s.png"];
 const bgArray = ["rock-bg ", "ice-bg ", "rock-bg ", "fire-bg ", "grass-bg "];
@@ -15,6 +15,7 @@ const elementDesc = ["rock: the erosive eraser",
                      "grass: the dryadic danger"]
 var playerNum = 1;
 var twoPlayers = true;
+var playerChoices = [-1, -1]; //default vaules out-of-bounds
 
 function main(){
   //Init: load player options
@@ -66,6 +67,10 @@ function loadRPSChoices(){
 
 function cpuPlay(){
 
+}
+
+function randImg(){
+  return (1 + Math.floor(Math.random() * 3)); //0 to 2
 }
 
 //see https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_document_addeventlistener_param
