@@ -1,6 +1,7 @@
 //Global constants and variables
 const fullScreenBlank = "<div id='f-scrn' class='fullscreen flex-col'></div>"
 const chooseElement = "<div id='choose-element' class='black-bg centered-content'></div>";
+const jefferyTheCreditsDragon = "<div id='credits' class='black-bg centered-content'><h6 class='white'>'Game' and 'design' by Nathaniel Rodriguez. For CSE204A.</h6></div>";
 const imgSRC = "images/rps/";
 const imgArray = [imgSRC + "rock_s.png",
                   imgSRC + "ice_s.png",
@@ -14,6 +15,7 @@ const elementDesc = ["rock: the erosive eraser",
                      "fire: the flaming fanatical",
                      "grass: the dryadic danger"]
 var playerNum = 1;
+var winner = -1; //defaults to out-of-bounds value
 var twoPlayers = true;
 var playerChoices = [-1, -1]; //default vaules out-of-bounds
 
@@ -60,8 +62,8 @@ function loadRPSChoices(){
     choiceImg.addEventListener("click", function(){
       playerPlay(this.id, playerNum);
     });
-    console.log("Choice " + (i+1) + " appended: " + imgArray[i]);
-    console.log("Container properties:\nClassname: " + choiceContainers[i].className);
+    // console.log("Choice " + (i+1) + " appended: " + imgArray[i]);
+    // console.log("Container properties:\nClassname: " + choiceContainers[i].className);
   }
 }
 
@@ -81,22 +83,99 @@ function playerPlay(option, player){
     playerNum = 2;
     clearScreen(); //not the most efficient but it works
     console.log("Player " + player + " chose option " + option + ": " + elementDesc[option]);
-    //loadRPSChoices();
+    playerChoices[0] = option;
+    loadRPSChoices();
+    $("body").append(jefferyTheCreditsDragon);
   } else if (twoPlayers){
     playerNum = 1;
-    clearScreen();
+    //clearScreen();
     console.log("Player " + player + " chose option " + option + ": " + elementDesc[option]);
-    //loadRPSChoices();
+    playerChoices[1] = option;
+    compareChoices(playerChoices);
   }else{
     console.log("Player " + player + " chose option " + option + ": " + elementDesc[option]);
-    console.log("If I wrote code for it, the CPU would play here.")
-    //cpuPlay();
+    console.log("If I wrote code for it, the CPU would play here.");
+    cpuChoice = cpuPlay();
+    console.log("Computer player chose option " + cpuChoice +": " + elementDesc[cpuChoice]);
+    //compareChoices();
   }
 }
 
 //takes the inputs from both players and determines a winner
-function compareChoices(){
-
+function compareChoices(playerChoices){
+  switch(playerChoices[0]){ //uses strict comparison so we will compare using strings
+    case "0": //rock
+      //beats ice (1) and fire (3), loses to grass (4) and earth (2)
+      if(playerChoices[1] == 1 || playerChoices[1] == 3){
+        winner = 1; //player 1 wins
+        console.log("Player 1 wins!");
+      } else if(playerChoices[1] == 2 || playerChoices[1] == 4){
+        winner = 2; //player 2 wins
+        console.log("Player 2 wins!");
+      } else{
+        winner = -1;
+        console.log("It's a tie!");
+      }
+      break;
+    case "1": //ice
+      //beats earth (2) and grass (4), loses to fire (3) and rock (0)
+      if(playerChoices[1] == 2 || playerChoices[1] == 4){
+        winner = 1;
+        console.log("Player 1 wins!");
+      } else if(playerChoices[1] == 0 || playerChoices[1] == 3){
+        winner = 2;
+        console.log("Player 2 wins!");
+      } else{
+        winner = -1;
+        console.log("It's a tie!");
+      }
+      break;
+    case "2": //earth
+      console.log("Compare")
+      //beats fire and rock, loses to grass and ice
+      if(playerChoices[1] == 3 || playerChoices[1] == 0){
+        winner = 1;
+        console.log("Player 1 wins!");
+      } else if(playerChoices[1] == 1 || playerChoices[1] == 4){
+        winner = 2;
+        console.log("Player 2 wins!");
+      } else{
+        winner = -1;
+        console.log("It's a tie!");
+      }
+      break;
+    case "3": //fire
+      console.log("Compare")
+      //beats ice and grass, loses to rock and ground
+      if(playerChoices[1] == 1 || playerChoices[1] == 4){
+        winner = 1;
+        console.log("Player 1 wins!");
+      } else if(playerChoices[1] == 0 || playerChoices[1] == 2){
+        winner = 2;
+        console.log("Player 2 wins!");
+      } else{
+        winner = -1;
+        console.log("It's a tie!");
+      }
+      break;
+    case "4": //grass
+      console.log("Compare")
+      //beats ground and rock, loses to fire and ice
+      if(playerChoices[1] == 2 || playerChoices[1] == 0){
+        winner = 1;
+        console.log("Player 1 wins!");
+      } else if(playerChoices[1] == 1 || playerChoices[1] == 3){
+        winner = 2;
+        console.log("Player 2 wins!");
+      } else{
+        winner = -1;
+        console.log("It's a tie!");
+      }
+      break;
+    default:
+      console.log("Error! Read value is " + playerChoices[0] + " when it should be in the interval [0, 4]!");
+      break;
+  }
 }
 
 //loads the win screen with the winner of the match in the center:
@@ -109,6 +188,7 @@ function loadWinScreen(winner){
 
 function clearScreen(){
   console.log("Document would be cleared here if I wrote any code to do so.");
+  $("body").empty();
   //document.write();
 }
 
