@@ -114,8 +114,10 @@ img.fill{
 }
 
 #play-again-button{
+  display: flex;
   height: 10%;
   width: 20%;
+
 }
 
 /*Colors: https://coolors.co/2f9fe0-a93f55-e7dfc6-e9f1f7-131b23*/

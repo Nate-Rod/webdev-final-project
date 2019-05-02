@@ -24,7 +24,7 @@ function main(){
   $(document).ready(function(){
     $("#splash-screen-main").hide().fadeIn(500);
   });
-
+  loadWinScreen(winner);
 }
 
 // function loadPlayerOptions(){
@@ -80,6 +80,7 @@ function randImg(){
 function coinFlip(){
   return (Math.floor(Math.random()*2) == 0);
 }
+
 //see https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_document_addeventlistener_param
 //for additional help w/ passing function parameters using addEventListener
 function playerPlay(option, player){
@@ -93,12 +94,12 @@ function playerPlay(option, player){
     $("body").append(jefferyTheCreditsDragon);
   } else if (twoPlayers){
     playerNum = 1;
-    //clearScreen();
+    clearScreen();
     console.log("Player " + player + " chose option " + option + ": " + elementDesc[option]);
     playerChoices[1] = option;
     compareChoices(playerChoices);
-    //loadWinScreen();
-    //$("body").append(jefferyTheCreditsDragon);
+    loadWinScreen();
+    $("body").append(jefferyTheCreditsDragon);
   }else{
     console.log("Player " + player + " chose option " + option + ": " + elementDesc[option]);
     console.log("If I wrote code for it, the CPU would play here.");
@@ -193,6 +194,67 @@ function loadWinScreen(winner){
   //load DOM elements
   //assign src of image based on either randomDog() or randomCat()
   //assign value of inspirational quote based on inspireMe()
+  var splashScreens = [document.createElement("div"),
+                       document.createElement("div")];
+  splashScreens[0].id = "splash-screen-small";
+  splashScreens[1].id = "splash-screen-medium";
+  splashScreens[1].className = "centered-content test-box";
+
+  var cols = [document.createElement("div"),
+              document.createElement("div")];
+  cols[0].className = "left-col centered-content test-box";
+  cols[1].className = "right-col centered-content test-box";
+  splashScreens[0].appendChild(cols[0]);
+  splashScreens[0].appendChild(cols[1]);
+
+  var colImgs = [document.createElement("img"),
+                 document.createElement("img")];
+  playerChoices[0] = 0; //test cases: remove once done
+  playerChoices[1] = 2;
+  colImgs[0].src = imgArray[playerChoices[0]];
+  colImgs[1].src = imgArray[playerChoices[1]];
+  cols[0].appendChild(colImgs[0]);
+  cols[1].appendChild(colImgs[1]);
+
+  var winnerTextContainer = document.createElement("div");
+  var winText = document.createElement("h1");
+  winText.innerText = "Player " + winner + " wins!";
+  winnerTextContainer.appendChild(winText);
+
+  var endPhoto = document.createElement("div");
+  endPhoto.id = "photo-end";
+  endPhoto.className = "large";
+  if(coinFlip()){
+    var randDog = randomDog();
+    randDog.className = "fill";
+    endPhoto.appendChild(randDog);
+  } else {
+    var randCat = randomCat();
+    randCat.className = "fill";
+    endPhoto.appendChild(randCat);
+  }
+
+  var inspirationStation = document.createElement("div");
+  inspirationStation.id = "quote-box";
+  inspirationStation.className = "centered-content";
+  var inspirationText = inspireMe();
+  inspirationStation.appendChild(inspirationText);
+
+  var playAgain = document.createElement("div");
+  playAgain.id = "play-again-button";
+  playAgain.className = "centered-content test-box";
+  playAgain.addEventListener("click", main());
+  var playText = document.createElement("h5");
+  playText.innerText = "Play again?";
+  playAgain.appendChild(playText);
+
+  splashScreens[1].appendChild(winnerTextContainer);
+  splashScreens[1].appendChild(endPhoto);
+  splashScreens[1].appendChild(inspirationStation);
+  splashScreens[1].appendChild(playAgain);
+
+  $("body").prepend(splashScreens[1]);
+  $("body").prepend(splashScreens[0]);
   /*
   var inspiredQuote = inspireMe();
   var randDog = randomDog();
@@ -233,14 +295,12 @@ return cat;
 }
 
 function inspireMe(){
-  console.log("Be inspired:");
   var xmlhttp = new XMLHttpRequest();
   var response = "";
   var quote = document.createElement("h5");
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       response = JSON.parse(this.responseText);
-      console.log(response.slip.advice);
       quote.innerText = response.slip.advice;
     };
   }
