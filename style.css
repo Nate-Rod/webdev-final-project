@@ -30,14 +30,14 @@ body{
 #splash-screen-small{
   display: inherit;
   flex-direction: row;
-  height: 33.33%;
+  height: 25%;
   width: 100%;
 }
 
 #splash-screen-medium{
   display: inherit;
-  flex-direction: row;
-  height: 66.66%;
+  flex-direction: column;
+  height: 75%;
   width: 100%;
 }
 /*RPS Game Screen*/
@@ -95,6 +95,29 @@ img.rounded-large, .large{
   width: 50%;
 }
 
+img.fill{
+  object-fit: contain;
+  overflow: hidden;
+}
+
+#photo-end{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+#quote-box{
+  display: flex;
+  text-align: center;
+  height: 15%;
+  width: 75%;
+}
+
+#play-again-button{
+  height: 10%;
+  width: 20%;
+}
+
 /*Colors: https://coolors.co/2f9fe0-a93f55-e7dfc6-e9f1f7-131b23*/
 .white{
   color: #e9f1f7;
@@ -125,6 +148,7 @@ img.rounded-large, .large{
   justify-content: center;
   align-items: center;
 }
+
 /*Debug CSS*/
 .test-box{
   border: 1px solid #000000;

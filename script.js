@@ -24,7 +24,7 @@ function main(){
   $(document).ready(function(){
     $("#splash-screen-main").hide().fadeIn(500);
   });
-  inspireMe();
+
 }
 
 // function loadPlayerOptions(){
@@ -193,7 +193,13 @@ function loadWinScreen(winner){
   //load DOM elements
   //assign src of image based on either randomDog() or randomCat()
   //assign value of inspirational quote based on inspireMe()
-
+  /*
+  var inspiredQuote = inspireMe();
+  var randDog = randomDog();
+  randDog.className = "fill";
+  document.getElementById("quote-box").appendChild(inspiredQuote)
+  document.getElementById("photo-end").appendChild(randDog)
+  */
 }
 
 function randomDog(){
@@ -229,8 +235,8 @@ return cat;
 function inspireMe(){
   console.log("Be inspired:");
   var xmlhttp = new XMLHttpRequest();
-  var response = ""
-  var quote = document.createElement("h4");
+  var response = "";
+  var quote = document.createElement("h5");
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       response = JSON.parse(this.responseText);
