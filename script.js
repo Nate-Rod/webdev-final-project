@@ -27,10 +27,6 @@ function main(){
   //loadWinScreen(winner);
 }
 
-// function loadPlayerOptions(){
-//
-// }
-
 function loadRPSChoices(){
   var choiceContainers = [];
   var elementNames = [];
@@ -81,7 +77,7 @@ function coinFlip(){
   return (Math.floor(Math.random()*2) == 0);
 }
 
-//see https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_document_addeventlistener_param
+//saw https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_document_addeventlistener_param
 //for additional help w/ passing function parameters using addEventListener
 function playerPlay(option, player){
   console.log("playerPlay(" + option +  " " + player + ")");
@@ -187,31 +183,22 @@ function compareChoices(playerChoices){
   }
 }
 
-//loads the win screen with the winner of the match in the center:
-//both players' choices are displayed in the left and right sides of the screen
-//a cat photo is in the center (pulled from API) along an inspirational quote
-//"Play again?" at the bottom-center to start the game over again
 function loadWinScreen(winner){
-  //load DOM elements
-  //assign src of image based on either randomDog() or randomCat()
-  //assign value of inspirational quote based on inspireMe()
   var splashScreens = [document.createElement("div"),
                        document.createElement("div")];
   splashScreens[0].id = "splash-screen-small";
   splashScreens[1].id = "splash-screen-medium";
-  splashScreens[1].className = "centered-content test-box";
+  splashScreens[1].className = "centered-content";
 
   var cols = [document.createElement("div"),
               document.createElement("div")];
-  cols[0].className = "left-col centered-content test-box";
-  cols[1].className = "right-col centered-content test-box";
+  cols[0].className = "left-col centered-content " + bgArray[playerChoices[0]];
+  cols[1].className = "right-col centered-content " + bgArray[playerChoices[1]];
   splashScreens[0].appendChild(cols[0]);
   splashScreens[0].appendChild(cols[1]);
 
   var colImgs = [document.createElement("img"),
                  document.createElement("img")];
-  playerChoices[0] = 0; //test cases: remove once done
-  playerChoices[1] = 2;
   colImgs[0].src = imgArray[playerChoices[0]];
   colImgs[1].src = imgArray[playerChoices[1]];
   cols[0].appendChild(colImgs[0]);
@@ -265,6 +252,7 @@ function loadWinScreen(winner){
   $("body").append(jefferyTheCreditsDragon);
 }
 
+//TODO: easter egg: add alec's dog
 function randomDog(){
 var xmlhttp = new XMLHttpRequest();
 var response = ""
