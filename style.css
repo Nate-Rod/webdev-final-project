@@ -27,6 +27,19 @@ body{
   width: 100%;
 }
 
+#splash-screen-small{
+  display: inherit;
+  flex-direction: row;
+  height: 33.33%;
+  width: 100%;
+}
+
+#splash-screen-medium{
+  display: inherit;
+  flex-direction: row;
+  height: 66.66%;
+  width: 100%;
+}
 /*RPS Game Screen*/
 div.element-name-wrapper{
   display: flex;

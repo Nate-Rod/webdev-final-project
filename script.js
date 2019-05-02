@@ -24,6 +24,7 @@ function main(){
   $(document).ready(function(){
     $("#splash-screen-main").hide().fadeIn(500);
   });
+  inspireMe();
 }
 
 // function loadPlayerOptions(){
@@ -75,6 +76,10 @@ function randImg(){
   return (1 + Math.floor(Math.random() * 3)); //0 to 2
 }
 
+//returns boolean
+function coinFlip(){
+  return (Math.floor(Math.random()*2) == 0);
+}
 //see https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_document_addeventlistener_param
 //for additional help w/ passing function parameters using addEventListener
 function playerPlay(option, player){
@@ -92,12 +97,14 @@ function playerPlay(option, player){
     console.log("Player " + player + " chose option " + option + ": " + elementDesc[option]);
     playerChoices[1] = option;
     compareChoices(playerChoices);
+    //loadWinScreen();
+    //$("body").append(jefferyTheCreditsDragon);
   }else{
     console.log("Player " + player + " chose option " + option + ": " + elementDesc[option]);
     console.log("If I wrote code for it, the CPU would play here.");
     cpuChoice = cpuPlay();
     console.log("Computer player chose option " + cpuChoice +": " + elementDesc[cpuChoice]);
-    //compareChoices();
+    compareChoices(playerChoices);
   }
 }
 
@@ -183,11 +190,50 @@ function compareChoices(playerChoices){
 //a cat photo is in the center (pulled from API) along an inspirational quote
 //"Play again?" at the bottom-center to start the game over again
 function loadWinScreen(winner){
+  //load DOM elements
+  //assign src of image based on either randomDog() or randomCat()
+  //assign value of inspirational quote based on inspireMe()
+}
 
+function randomDog(){
+///  https://dog.ceo/api/breeds/image/random Fetch!
+var xmlhttp = new XMLHttpRequest();
+var response = ""
+var dog = document.createElement("img");
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    response = JSON.parse(this.responseText);
+    dog.src = response.message;
+    console.log("Image data: dog photo with url" + dog.src);
+  };
+}
+xmlhttp.open("GET", "https://dog.ceo/api/breeds/image/random", true);
+xmlhttp.send();
+$("body").append(dog);
+}
+
+function randomCat(){
+var xmlhttp = new XMLHttpRequest();
+var response = ""
+var cat = document.createElement("img");
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    response = JSON.parse(this.responseText);
+    cat.src = response.file;
+  };
+}
+xmlhttp.open("GET", "https://aws.random.cat/meow", true);
+xmlhttp.send();
+$("body").append(cat);
+}
+
+function inspireMe(){
+  console.log("Be inspired:");
+  
 }
 
 function clearScreen(){
-  console.log("Document would be cleared here if I wrote any code to do so.");
+  //console.log("Document would be cleared here if I wrote any code to do so.");
   $("body").empty();
   //document.write();
 }
