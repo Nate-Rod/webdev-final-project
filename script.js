@@ -100,7 +100,6 @@ function playerPlay(option, player){
     playerChoices[1] = option;
     compareChoices(playerChoices);
     loadWinScreen(winner);
-    $("body").append(jefferyTheCreditsDragon);
   }else{
     console.log("Player " + player + " chose option " + option + ": " + elementDesc[option]);
     playerChoices[0] = option;
@@ -249,7 +248,9 @@ function loadWinScreen(winner){
   var playAgain = document.createElement("div");
   playAgain.id = "play-again-button";
   playAgain.className = "centered-content test-box";
-  playAgain.addEventListener("click", main());
+  playAgain.addEventListener("click", function(){
+    location.reload(); //once again w3schools saves the day
+  });
   var playText = document.createElement("h5");
   playText.innerText = "Play again?";
   playAgain.appendChild(playText);
