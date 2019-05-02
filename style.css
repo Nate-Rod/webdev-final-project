@@ -90,7 +90,7 @@ img.rounded-small, img.rounded-medium, img.rounded-large, img.rounded{
   border-radius: 50%;
 }
 
-img.rounded-large, img.large{
+img.rounded-large, .large{
   height: 50%;
   width: 50%;
 }

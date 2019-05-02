@@ -193,10 +193,10 @@ function loadWinScreen(winner){
   //load DOM elements
   //assign src of image based on either randomDog() or randomCat()
   //assign value of inspirational quote based on inspireMe()
+
 }
 
 function randomDog(){
-///  https://dog.ceo/api/breeds/image/random Fetch!
 var xmlhttp = new XMLHttpRequest();
 var response = ""
 var dog = document.createElement("img");
@@ -204,12 +204,11 @@ xmlhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     response = JSON.parse(this.responseText);
     dog.src = response.message;
-    console.log("Image data: dog photo with url" + dog.src);
   };
 }
 xmlhttp.open("GET", "https://dog.ceo/api/breeds/image/random", true);
 xmlhttp.send();
-$("body").append(dog);
+return dog;
 }
 
 function randomCat(){
@@ -224,12 +223,24 @@ xmlhttp.onreadystatechange = function() {
 }
 xmlhttp.open("GET", "https://aws.random.cat/meow", true);
 xmlhttp.send();
-$("body").append(cat);
+return cat;
 }
 
 function inspireMe(){
   console.log("Be inspired:");
-  
+  var xmlhttp = new XMLHttpRequest();
+  var response = ""
+  var quote = document.createElement("h4");
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      response = JSON.parse(this.responseText);
+      console.log(response.slip.advice);
+      quote.innerText = response.slip.advice;
+    };
+  }
+  xmlhttp.open("GET", "https://api.adviceslip.com/advice", true);
+  xmlhttp.send();
+  return quote;
 }
 
 function clearScreen(){
