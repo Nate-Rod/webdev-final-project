@@ -24,7 +24,7 @@ function main(){
   $(document).ready(function(){
     $("#splash-screen-main").hide().fadeIn(500);
   });
-  loadWinScreen(winner);
+  //loadWinScreen(winner);
 }
 
 // function loadPlayerOptions(){
@@ -90,6 +90,7 @@ function playerPlay(option, player){
     clearScreen(); //not the most efficient but it works
     console.log("Player " + player + " chose option " + option + ": " + elementDesc[option]);
     playerChoices[0] = option;
+    console.log(playerChoices[0]);
     loadRPSChoices();
     $("body").append(jefferyTheCreditsDragon);
   } else if (twoPlayers){
@@ -98,19 +99,23 @@ function playerPlay(option, player){
     console.log("Player " + player + " chose option " + option + ": " + elementDesc[option]);
     playerChoices[1] = option;
     compareChoices(playerChoices);
-    loadWinScreen();
+    loadWinScreen(winner);
     $("body").append(jefferyTheCreditsDragon);
   }else{
     console.log("Player " + player + " chose option " + option + ": " + elementDesc[option]);
-    console.log("If I wrote code for it, the CPU would play here.");
+    playerChoices[0] = option;
     cpuChoice = cpuPlay();
+    playerChoices[1] = cpuChoice;
     console.log("Computer player chose option " + cpuChoice +": " + elementDesc[cpuChoice]);
     compareChoices(playerChoices);
+    clearScreen();
+    loadWinScreen(winner);
   }
 }
 
 //takes the inputs from both players and determines a winner
 function compareChoices(playerChoices){
+  console.log("compareChoices(" + playerChoices + ")");
   switch(playerChoices[0]){ //uses strict comparison so we will compare using strings
     case "0": //rock
       //beats ice (1) and fire (3), loses to grass (4) and earth (2)
@@ -139,7 +144,6 @@ function compareChoices(playerChoices){
       }
       break;
     case "2": //earth
-      console.log("Compare")
       //beats fire and rock, loses to grass and ice
       if(playerChoices[1] == 3 || playerChoices[1] == 0){
         winner = 1;
@@ -153,7 +157,6 @@ function compareChoices(playerChoices){
       }
       break;
     case "3": //fire
-      console.log("Compare")
       //beats ice and grass, loses to rock and ground
       if(playerChoices[1] == 1 || playerChoices[1] == 4){
         winner = 1;
@@ -167,7 +170,6 @@ function compareChoices(playerChoices){
       }
       break;
     case "4": //grass
-      console.log("Compare")
       //beats ground and rock, loses to fire and ice
       if(playerChoices[1] == 2 || playerChoices[1] == 0){
         winner = 1;
@@ -218,7 +220,11 @@ function loadWinScreen(winner){
 
   var winnerTextContainer = document.createElement("div");
   var winText = document.createElement("h1");
-  winText.innerText = "Player " + winner + " wins!";
+  if(winner == -1){
+    winText.innerText = "It's a tie!";
+  } else {
+    winText.innerText = "Player " + winner + " wins!";
+  }
   winnerTextContainer.appendChild(winText);
 
   var endPhoto = document.createElement("div");
@@ -255,13 +261,7 @@ function loadWinScreen(winner){
 
   $("body").prepend(splashScreens[1]);
   $("body").prepend(splashScreens[0]);
-  /*
-  var inspiredQuote = inspireMe();
-  var randDog = randomDog();
-  randDog.className = "fill";
-  document.getElementById("quote-box").appendChild(inspiredQuote)
-  document.getElementById("photo-end").appendChild(randDog)
-  */
+  $("body").append(jefferyTheCreditsDragon);
 }
 
 function randomDog(){
