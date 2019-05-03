@@ -188,8 +188,12 @@ function loadWinScreen(winner){
                        document.createElement("div")];
   splashScreens[0].id = "splash-screen-small";
   splashScreens[1].id = "splash-screen-medium";
-  splashScreens[1].className = "centered-content";
-
+  splashScreens[1].className = "centered-content ";
+  if(twoPlayers){
+    splashScreens[1].className += "blue-bg";
+  } else {
+    splashScreens[1].className += "purple-bg";
+  }
   var cols = [document.createElement("div"),
               document.createElement("div")];
   cols[0].className = "left-col centered-content " + bgArray[playerChoices[0]];
@@ -206,6 +210,7 @@ function loadWinScreen(winner){
 
   var winnerTextContainer = document.createElement("div");
   var winText = document.createElement("h1");
+  winText.className = "white";
   if(winner == -1){
     winText.innerText = "It's a tie!";
   } else {
@@ -230,11 +235,12 @@ function loadWinScreen(winner){
   inspirationStation.id = "quote-box";
   inspirationStation.className = "centered-content";
   var inspirationText = inspireMe();
+  inspirationText.className = "white";
   inspirationStation.appendChild(inspirationText);
 
   var playAgain = document.createElement("div");
   playAgain.id = "play-again-button";
-  playAgain.className = "centered-content test-box";
+  playAgain.className = "centered-content white-bg";
   playAgain.addEventListener("click", function(){
     location.reload(); //once again w3schools saves the day
   });
@@ -250,6 +256,10 @@ function loadWinScreen(winner){
   $("body").prepend(splashScreens[1]);
   $("body").prepend(splashScreens[0]);
   $("body").append(jefferyTheCreditsDragon);
+}
+
+function keepScore(){
+
 }
 
 //TODO: easter egg: add alec's dog
