@@ -211,10 +211,18 @@ function loadWinScreen(winner){
   var winnerTextContainer = document.createElement("div");
   var winText = document.createElement("h1");
   winText.className = "white";
-  if(winner == -1){
-    winText.innerText = "It's a tie!";
+  if(twoPlayers){
+    if(winner == -1){
+      winText.innerText = "It's a tie!";
+    } else {
+      winText.innerText = "Player " + winner + " wins!";
+    }
   } else {
-    winText.innerText = "Player " + winner + " wins!";
+    if(winner == 1){
+      winText.innerText = "You win!";
+    } else if (winner == 2){
+      winText.innerText = "The Computer wins!";
+    }
   }
   winnerTextContainer.appendChild(winText);
 
